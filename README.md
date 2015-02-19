@@ -27,7 +27,8 @@ cdbw_close(cdb);
 To read a cdb:
 
 ```c
-const char *key = "some-key";
+const char key[] = "some-key";
+const size_t keylen = sizeof(key) - 1;
 struct cdbr *cdb;
 const void *data;
 size_t len;
@@ -35,12 +36,15 @@ size_t len;
 if ((cdb = cdbr_open(path, CDBR_DEFAULT)) == NULL)
 	err(EXIT_FAILURE, "cdbr_open");
 
-if (cdbr_find(cdb, key, strlen(key), &data, &len) == 0 &&
-    prefix_match(data, key)) {
-	/*
-	 * Note: prefix_match() validates that the value corresponds
-	 * to our key (done using a prefix in the example above).
-	 */
+/*
+ * Perform a lookup.  Note: it must be validated that the value corresponds
+ * to our key, e.g. prefix_match() illustrates the prefix check for the
+ * example above, where key is a part of the value as a predix.
+ */
+if (cdbr_find(cdb, key, keylen, &data, &len) == 0 && pref_match(data, key)) {
+	/* Found .. */
+} else {
+	/* Not found .. */
 }
 
 cdbr_close(cdb);
