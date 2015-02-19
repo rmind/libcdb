@@ -37,9 +37,9 @@ if ((cdb = cdbr_open(path, CDBR_DEFAULT)) == NULL)
 	err(EXIT_FAILURE, "cdbr_open");
 
 /*
- * Perform a lookup.  Note: it must be validated that the value corresponds
- * to our key, e.g. prefix_match() illustrates the prefix check for the
- * example above, where key is a part of the value as a predix.
+ * Perform a lookup.  Note that it must be validated that the value
+ * corresponds to our key, e.g. pref_match() illustrates the prefix check
+ * for the example above, where key is a part of the value as a predix.
  */
 if (cdbr_find(cdb, key, keylen, &data, &len) == 0 && pref_match(data, key)) {
 	/* Found .. */

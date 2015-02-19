@@ -44,7 +44,9 @@
 #define	__GNUC_PREREQ__(x, y)	0
 #endif
 
+#ifndef __unused
 #define	__unused	__attribute__((__unused__))
+#endif
 
 #endif
 
