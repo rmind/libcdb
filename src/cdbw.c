@@ -38,16 +38,24 @@
 #include <sys/cdefs.h>
 __RCSID("$NetBSD: cdbw.c,v 1.5 2012/07/21 22:49:37 joerg Exp $");
 
+#if 0
 #include "namespace.h"
+#endif
 
 #if !HAVE_NBTOOL_CONFIG_H || HAVE_SYS_ENDIAN_H
+#ifdef __NetBSD__
 #include <sys/endian.h>
+#else
+#include <endian.h>
+#endif
 #endif
 #include <sys/queue.h>
 #include <cdbw.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+#include "cdb_impl.h"
 
 #ifdef __weak_alias
 __weak_alias(cdbw_close,_cdbw_close)
@@ -276,6 +284,12 @@ uint32_t
 cdbw_stable_seeder(void)
 {
 	return 0;
+}
+
+static uint32_t
+cdbw_random_seeder(void)
+{
+	return (uint32_t)random();
 }
 
 #define unused 0xffffffffU
@@ -576,7 +590,11 @@ cdbw_output(struct cdbw *cdbw, int fd, const char descr[16],
 		seedgen = cdbw_stable_seeder;
 #else
 	if (seedgen == NULL)
+#ifdef __NetBSD__
 		seedgen = arc4random;
+#else
+		seedgen = cdbw_random_seeder;
+#endif
 #endif
 
 	rv = 0;

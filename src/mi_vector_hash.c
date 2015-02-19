@@ -46,7 +46,10 @@
 __RCSID("$NetBSD: mi_vector_hash.c,v 1.1 2013/12/11 01:24:08 joerg Exp $");
 
 #if !HAVE_NBTOOL_CONFIG_H || HAVE_SYS_ENDIAN_H
+#ifdef __NetBSD__
 #include <sys/endian.h>
+#include <endian.h>
+#endif
 #endif
 
 #if defined(_KERNEL) || defined(_STANDALONE)
@@ -54,11 +57,15 @@ __RCSID("$NetBSD: mi_vector_hash.c,v 1.1 2013/12/11 01:24:08 joerg Exp $");
 #include <sys/systm.h>
 #include <lib/libkern/libkern.h>
 #else
+#if 0
 #include "namespace.h"
+#endif
 
 #include <stdint.h>
 #include <stdlib.h>
 #endif
+
+#include "cdb_impl.h"
 
 #define mix(a, b, c) do {		\
 	a -= b; a -= c; a ^= (c >> 13);	\

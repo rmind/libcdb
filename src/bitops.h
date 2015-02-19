@@ -31,7 +31,22 @@
 #ifndef _SYS_BITOPS_H_
 #define _SYS_BITOPS_H_
 
+#ifdef __NetBSD__
 #include <sys/stdint.h>
+#else
+#include <stdint.h>
+
+#ifdef __GNUC__
+#define	__GNUC_PREREQ__(x, y)						\
+	((__GNUC__ == (x) && __GNUC_MINOR__ >= (y)) ||			\
+	 (__GNUC__ > (x)))
+#else
+#define	__GNUC_PREREQ__(x, y)	0
+#endif
+
+#define	__unused	__attribute__((__unused__))
+
+#endif
 
 /*
  * Find First Set functions
@@ -325,5 +340,9 @@ fast_remainder32(uint32_t _v, uint32_t _div, uint32_t _m, uint8_t _s1,
 		(__v)->_b[__i] = 0;					\
 	} while (/* CONSTCOND */ 0)
 #endif /* GCC 2.95 */
+
+#ifndef __NetBSD__
+#undef __unused
+#endif
 
 #endif /* _SYS_BITOPS_H_ */

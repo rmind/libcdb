@@ -38,15 +38,25 @@
 #include <sys/cdefs.h>
 __RCSID("$NetBSD: cdbr.c,v 1.1 2013/12/11 01:24:08 joerg Exp $");
 
+#if 0
 #if !defined(_KERNEL) && !defined(_STANDALONE)
 #include "namespace.h"
 #endif
+#endif
 
 #if !HAVE_NBTOOL_CONFIG_H
+#if __NetBSD__
 #include <sys/bitops.h>
+#else
+#include "bitops.h"
+#endif
 #endif
 #if !HAVE_NBTOOL_CONFIG_H || HAVE_SYS_ENDIAN_H
+#ifdef __NetBSD__
 #include <sys/endian.h>
+#else
+#include <endian.h>
+#endif
 #endif
 
 #if defined(_KERNEL) || defined(_STANDALONE)
@@ -70,6 +80,8 @@ __RCSID("$NetBSD: cdbr.c,v 1.1 2013/12/11 01:24:08 joerg Exp $");
 #include <unistd.h>
 #define SET_ERRNO(val) errno = (val)
 #endif
+
+#include "cdb_impl.h"
 
 #if !defined(_KERNEL) && !defined(_STANDALONE)
 #ifdef __weak_alias
@@ -112,8 +124,9 @@ struct cdbr {
 
 #if !defined(_KERNEL) && !defined(_STANDALONE)
 static void
-cdbr_unmap(void *cookie __unused, void *base, size_t size)
+cdbr_unmap(void *cookie, void *base, size_t size)
 {
+	(void)cookie;
 	munmap(base, size);
 }
 
