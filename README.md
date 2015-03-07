@@ -5,9 +5,14 @@ based on perfect hashing.  This package provides a shared library.
 
 ## Examples ##
 
+The following are the C code fragments to demonstrate the use of libcdb.
+
 To create a cdb:
 
 ```c
+#include <cdbw.h>
+...
+
 const char *key = "some-key";
 const char *val = "some-key:some-val";
 struct cdbw *cdb;
@@ -27,6 +32,9 @@ cdbw_close(cdb);
 To read a cdb:
 
 ```c
+#include <cdbr.h>
+...
+
 const char key[] = "some-key";
 const size_t keylen = sizeof(key) - 1;
 struct cdbr *cdb;
