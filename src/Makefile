@@ -14,7 +14,7 @@ libcdb_OBJS=	cdbr.lo cdbw.lo mi_vector_hash.lo
 all: libcdb.la
 
 %.lo: %.c
-	libtool --mode=compile --tag CC $(CC) $(CFLAGS) $(CPPFLAGS) -c $<
+	libtool --mode=compile --tag CC $(CC) $(CFLAGS) -c $(notdir $^)
 
 libcdb.la: $(libcdb_OBJS)
 	libtool --mode=link --tag CC $(CC) $(LDFLAGS) -o $@ $^
