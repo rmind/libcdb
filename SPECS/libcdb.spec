@@ -16,17 +16,21 @@ The NetBSD's cdb library provides a space efficient (key,value) database
 based on perfect hashing.  This package provides a shared library.
 
 %prep
-%setup -q -n src
+%setup -q -c
 
 %build
 make %{?_smp_mflags} LIBDIR=%{_libdir}
 
 %install
-make install DESTDIR=%{buildroot} LIBDIR=%{_libdir} INCDIR=%{_includedir}
+make install \
+    DESTDIR=%{buildroot} \
+    LIBDIR=%{_libdir} \
+    INCDIR=%{_includedir} \
+    MANDIR=%{_mandir}
 
 %files
 %{_libdir}/*
 %{_includedir}/*
-#%{_mandir}/*
+%{_mandir}/*
 
 %changelog

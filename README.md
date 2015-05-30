@@ -1,7 +1,19 @@
-# libcdb #
+# libcdb: NetBSD's constant database (cdb) library #
 
-The NetBSD's cdb library provides a space efficient (key,value) database
-based on perfect hashing.  This package provides a shared library.
+The NetBSD's constant database (cdb) library provides a space efficient
+key-value database based on perfect hashing, thus guaranteeing the O(1)
+lookup time.  The database preserves the key order.
+
+This package provides a shared library.  Just `make rpm` to build an RPM.
+
+## Algorithm ##
+
+CHM-3: "An optimal algorithm for generating minimal perfect hash functions",
+by Czech, Havas and Majewski in Information Processing Letters, 43(5):256-264, October 1992.
+
+References:
+- http://cmph.sourceforge.net/papers/chm92.pdf
+- http://www.netbsd.org/gallery/presentations/joerg/asiabsdcon2013/hashing.pdf
 
 ## Examples ##
 
@@ -57,3 +69,10 @@ if (cdbr_find(cdb, key, keylen, &data, &len) == 0 && pref_match(data, key)) {
 
 cdbr_close(cdb);
 ```
+
+For more details, see cdb(5), cdbr(3) and cdbw(3) manual pages.
+
+## Author ##
+
+This code is derived from software contributed to The NetBSD Foundation
+by Joerg Sonnenberger.
