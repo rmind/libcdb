@@ -1,4 +1,4 @@
-# libcdb: NetBSD's constant database (cdb) library #
+# NetBSD's constant database (cdb) library #
 
 The NetBSD's constant database (cdb) library provides a space efficient
 key-value database based on perfect hashing, thus guaranteeing the O(1)
