@@ -59,7 +59,7 @@ if ((cdb = cdbr_open(path, CDBR_DEFAULT)) == NULL)
 /*
  * Perform a lookup.  Note that it must be validated that the value
  * corresponds to our key, e.g. pref_match() illustrates the prefix check
- * for the example above, where key is a part of the value as a predix.
+ * for the example above where the key is a part of the value as a prefix.
  */
 if (cdbr_find(cdb, key, keylen, &data, &len) == 0 && pref_match(data, key)) {
 	/* Found .. */
