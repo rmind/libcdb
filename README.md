@@ -76,3 +76,10 @@ For more details, see cdb(5), cdbr(3) and cdbw(3) manual pages.
 
 This code is derived from software contributed to The NetBSD Foundation
 by Joerg Sonnenberger.
+
+## Packages
+
+Just build the package, install it and link the library using the
+`-lcdb` flag.
+* RPM (tested on RHEL/CentOS 7): `make rpm`
+* DEB (tested on Debian 9): `make deb`

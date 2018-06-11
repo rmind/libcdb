@@ -1,5 +1,7 @@
+%define version	%(cat %{_topdir}/version.txt)
+
 Name:		libcdb
-Version:	1.0
+Version:	%{version}
 Release:	1%{?dist}
 Summary:	The NetBSD's cdb library for manipulating constant databases
 Group:		System Environment/Libraries
@@ -19,7 +21,8 @@ based on perfect hashing.  This package provides a shared library.
 %setup -q -c
 
 %build
-make %{?_smp_mflags} LIBDIR=%{_libdir}
+make %{?_smp_mflags} lib \
+    LIBDIR=%{_libdir}
 
 %install
 make install \

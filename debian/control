@@ -1,0 +1,32 @@
+Source: cdb
+Priority: extra
+Maintainer: https://github.com/netbsd
+Build-Depends:
+ debhelper (>= 9),
+ make,
+ libtool
+Standards-Version: 3.9.1
+Homepage: http://cvsweb.netbsd.org/bsdweb.cgi/src/lib/libc/cdb/
+License: BSD-2-clause
+
+Package: libcdb1
+Section: lib
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: The NetBSD's cdb library for manipulating constant databases
+ The NetBSD's cdb library provides a space efficient (key,value) database
+ based on perfect hashing.  This package provides a shared library.
+
+Package: libcdb1-dbg
+Section: debug
+Architecture: any
+Depends: ${misc:Depends}, libcdb1 (= ${binary:Version})
+Description: Debug symbols for libcdb1
+ Debug symbols for libcdb1.
+
+Package: libcdb-dev
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libcdb1 (= ${binary:Version})
+Description: Development files for libcdb1
+ Development files for libcdb1.
